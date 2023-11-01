@@ -20,8 +20,6 @@ class Login extends Controller{
 
         $data['judul'] = 'Login';
 
-        var_dump($_SESSION);
-
         $this->view('tamplates/headerlogin', $data);
         $this->view('login/index', $data);
         $this->view('tamplates/footer');
