@@ -2,25 +2,22 @@
 
 class Login extends Controller{
 
-    public function __construct()
-    {
-        // if(!empty($_SESSION['status'])) {
-        //     if($_SESSION['status'] != 0) {
-        //         $location = 'dashboard';
-        //     } else {
-        //         $location = 'userpage';
-        //     } 
-        //     // else {
-        //     //     $location = 'login';
-        //     // }
-            
-        //         header('Location: ' . BASEURL . '/' . $location);
-        //         exit;
-        // }
-    }
     
     public function index()
     {
+
+        if( @$_SESSION['userLogin'] ) {
+
+            if( $_SESSION['status'] != 0) {
+                $location = 'dashboard';
+            } else {
+                $location = 'userpage';
+            }
+
+            header('Location: ' . BASEURL . '/' .$location);
+            exit; 
+        }
+
         $data['judul'] = 'Login';
 
         var_dump($_SESSION);
@@ -66,10 +63,8 @@ class Login extends Controller{
                     $_SESSION['status'] = $data['status'];
 
                     if( $data['status'] != 0 ) {
-                        $_SESSION['userTrue'] = true;
                         $location = "dashboard";
                     } else {
-                        $_SESSION['userTrue'] = false;
                         $location = "userpage";
                     }
 

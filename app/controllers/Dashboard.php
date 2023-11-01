@@ -5,13 +5,12 @@ class Dashboard extends Controller{
     public function __construct()
     {
         $location = 0;
-
-        if( $_SESSION['userLogin'] != 'success' ){
+        if( !@$_SESSION['userLogin'] ) {
             $location = 'login';
-        } elseif( $_SESSION['userTrue'] != true) {
-            $location = 'userpage';
+        } else if( $_SESSION['status'] != 1) {
+            $location = 'login';
         }
-        if($location) {
+        if($location != 0) {
             header('Location: ' . BASEURL . '/' . $location);
             exit;
         }
@@ -23,7 +22,7 @@ class Dashboard extends Controller{
         $data['judul'] = 'Dashboard';
 
         $this->view('tamplates/header', $data);
-        $this->view('dashboard/index');
+        $this->view('dashboard/index', $data);
         $this->view('tamplates/footer');
     }
 
