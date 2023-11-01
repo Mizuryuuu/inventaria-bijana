@@ -57,6 +57,11 @@ class Login extends Controller{
 
                 if( password_verify($password, $passwordDb) ) {
 
+                    // account admin
+                    // admin : 12345
+                    // account User biasa
+                    // bijana : qwerty
+
                     $_SESSION['userLogin'] = "success";
                     $_SESSION['status'] = $data['status'];
 
