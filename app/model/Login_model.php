@@ -1,7 +1,7 @@
 <?php 
 
 class Login_model {
-    private $tabel = 'user';
+    private $tabel = 'accounts';
     private $db;
 
     public function __construct()

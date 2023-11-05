@@ -47,6 +47,7 @@ class Login extends Controller{
 
             if( $this->model('Login_model')->cekUserTrue($username) > 0 ) {
 
+                
                 $data = $this->model('Login_model')->ambilDataUser($username);
                 $passwordDb = $data['password'];
 
@@ -58,9 +59,9 @@ class Login extends Controller{
                     // bijana : qwerty
 
                     $_SESSION['userLogin'] = "success";
-                    $_SESSION['status'] = $data['status'];
+                    $_SESSION['status'] = $data['level'];
 
-                    if( $data['status'] != 0 ) {
+                    if( $data['level'] != 0 ) {
                         $location = "dashboard";
                     } else {
                         $location = "userpage";
