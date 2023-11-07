@@ -102,7 +102,7 @@
                               <a href="<?= BASEURL ?>/dashboard/delete/<?= $row['id_acc'] ?>" class="btn btn-danger text-white rounded"><i class="fa-solid fa-trash-can" style="color: #ffffff;"></i></a>
                               </div>
                             </div>
-                        </td>
+                        </td> 
                     </tr>
                     <?php $i++ ?>
                     <?php endforeach ; ?>
@@ -160,8 +160,8 @@
                 <div class="mb-3">
                   <label class="mb-2" for="level">Level</label>
                   <select name="level" id="level" class="form-select">
-                    <option value="admin">Admin</option>
                     <option value="user">User</option>
+                    <option value="admin">Admin</option>
                   </select>
                 </div>
               </div>

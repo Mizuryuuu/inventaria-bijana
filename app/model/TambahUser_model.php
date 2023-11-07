@@ -9,7 +9,7 @@ class TambahUser_model {
     {
         $this->db = new Database;
     }
-
+ 
     public function tambahDataUser($data)
     {
         $username = $data['username'];

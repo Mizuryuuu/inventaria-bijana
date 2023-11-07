@@ -17,7 +17,7 @@ class Dashboard extends Controller{
     }
 
     public function index()
-    {
+    { 
 
         $data['judul'] = 'Dashboard';
 
@@ -29,18 +29,12 @@ class Dashboard extends Controller{
     } 
 
     public function tambah(){
-        
-        $rowAccounts = $this->model('Accounts_model')->getAllAccountUser();
-        if( $rowAccounts['username'] === $_POST['username'] || $rowAccounts['email'] === $_POST['email'] ) {
-            if( $this->model('TambahUser_model')->tambahDataUser($_POST) > 0 ) {  
-                $location = 'dashboard';
-            } else {
-                $location = 'dashboard';
-            }
+
+        if( $this->model('TambahUser_model')->tambahDataUser($_POST) > 0 ) {  
+            $location = 'dashboard';
         } else {
             $location = 'dashboard';
-        }
-        
+        }        
 
         header('Location: ' . BASEURL . '/' . $location);
         exit;

@@ -3,6 +3,7 @@
             <div class="container main">
                 <div class="row">
                     <div class="col-md-6 side-image">
+                        
                     </div>
 
 
