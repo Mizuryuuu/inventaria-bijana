@@ -10,8 +10,8 @@
                   <div class="row no-gutters align-items-center">
                       <div class="col mr-2">
                           <div class="text-xs fw-bold text-primary text-uppercase mb-1">
-                              Total Siswa Aktif</div>
-                          <div class="h5"><?= count($data['accountUser']); ?></div>
+                              Total Account Aktif</div> 
+                          <div class="h5"><?= count($data['activeAccountUser']); ?></div>
                       </div>
                       <div class="col-auto">
                           <i class="fa-solid fa-calendar fa-2x" style="color: #abadb8;"></i>
@@ -55,15 +55,16 @@
               </div>
             </div>
 
-           
+              <?php Flasher::flashMessege(); ?>
+
           </div>
         </div>
 
-        <div class="container shadow p-4 rounded">
-            <div class="mb-4 mt-2">
-                <h4>Data Accounts Users</h4>
+        <div class="container shadow p-3 rounded">
+            <div class=" mt-2 ms-2">
+                <h4 class="mb-3">Data Accounts Users</h4>
+                <a href="" data-bs-toggle="modal" data-bs-target="#TambahUser" class="btn btn-primary ms-2 mb-3">Tambah User</a>
             </div>
-            <a href="" data-bs-toggle="modal" data-bs-target="#TambahUser" class="btn btn-primary ms-2 mb-3">Tambah User</a>
 
             <div class="px-4">
                 <table class="table table-striped text-center align-middle">
@@ -95,7 +96,7 @@
                                 <!-- Konten Kolom 1 -->
                               </div>
                               <div class="col-4">
-                              <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-warning text-white rounded"><i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></a>
+                              <button data-bs-toggle="modal" data-bs-target="#editDataUser" data-id="<?= $row['id_acc'] ?>" value="<?= $row['id_acc'] ?>" id="dataEdit" class="btn btn-warning text-white rounded"><i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></button>
                                 <!-- Konten Kolom 2 -->
                               </div>
                               <div class="col-4">
@@ -107,7 +108,50 @@
                     <?php $i++ ?>
                     <?php endforeach ; ?>
                     </tbody> 
-                </table>
+                </ta  ble>
+            </div>
+            <div class="pagination d-flex justify-content-end me-5 ">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <?php if( $data['halaman_aktif'] > 1 ) : ?>
+                    <a class="text-decoration-none page-item" href="<?= BASEURL; ?>/dashboard/pages/<?= $data['halaman_aktif'] - 1 ?>">
+                      <li class="page-link">
+                        <span>Previous</span>
+                      </li>
+                    </a>
+                  <?php else : ?>
+                    <li class="page-item disabled">
+                      <span class="page-link">Previous</span>
+                    </li>
+                  <?php endif; ?>
+                  <?php for ( $i = 1; $i <= $data['jumlah_halaman'] ; $i++ ) : ?>
+                    <?php if( $i == $data['halaman_aktif'] ) : ?>
+                      <a class="page-item  active" href="<?= BASEURL ?>/dashboard/pages/<?= $i ?>">
+                        <li class="page-link">
+                          <?= $i ?>
+                        </li>
+                      </a>
+                    <?php else : ?>
+                      <a class="page-link" href="<?= BASEURL ?>/dashboard/pages/<?= $i ?>">
+                        <li class="page-item">
+                          <?= $i ?>
+                        </li>
+                      </a>
+                    <?php endif; ?>
+                  <?php endfor; ?>
+                  <?php if( $data['halaman_aktif'] < $data['jumlah_halaman'] ) : ?>
+                    <a class="text-decoration-none page-item" href="<?= BASEURL; ?>/dashboard/pages/<?= $data['halaman_aktif'] + 1 ?>">
+                      <li class="page-link">
+                        <span>Next</span>
+                      </li>
+                    </a>
+                  <?php else : ?>
+                    <li class="page-item disabled">
+                      <span class="page-link">Next</span>
+                    </li>
+                  <?php endif; ?>
+                </ul>
+              </nav>
             </div>
         </div>
         
@@ -115,21 +159,70 @@
 </div>
 
 
-<!-- Modal -->
+<!-- Modal Change Password -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog  modal-dialog-centered">
         <div class="modal-content">
+          <form action="<?= BASEURL; ?>/dashboard/changePassword" method="post">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Ubah Password User</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid px-4 my-4">
+                <div class="mb-3">
+                  <label class="mb-2" for="password">Password</label>
+                  <input class="form-control" type="text" name="password" id="password">
+                </div>
+                <div class="mb-3">
+                  <label class="mb-2" for="konfirmasi_password">Konfirmasi Password</label>
+                  <input class="form-control" type="text" name="konfirmasi_password" id="konfirmasi_password">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Edit Data User -->
+    <div class="modal fade" id="editDataUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+        <form action="<?= BASEURL; ?>/dashboard/ubahDataUser" method="post">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <h3 class="modal-title fs-3" id="exampleModalLabel">Edit User</h3>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            ...
+            <div class="container-fluid px-4 my-4">
+              <input type="hidden" name="id_acc" id="id_acc">
+              <div class="mb-3">
+                <label class="mb-2" for="nis">Username</label>
+                <input type="text" name="nis" id="nis" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label class="mb-2" for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label class="mb-2" for="status">Status</label>
+                <select class="form-select" name="status" id="status">
+                  <option value="true">True</option>
+                  <option value="false">False</option>
+                </select>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
           </div>
+        </form>
         </div>
       </div>
     </div>
@@ -146,8 +239,12 @@
             <form action="<?= BASEURL ?>/dashboard/tambah" method="post">
               <div class="container-fluid px-4 my-4">
                 <div class="mb-3">
-                  <label class="mb-2" for="username">Username</label>
-                  <input type="text" name="username" id="username" class="form-control" placeholder="Masukan Username. . .">
+                  <label class="mb-2" for="nis">Username</label>
+                  <select name="nis" id="nis" class="form-select">
+                    <?php foreach ($data['nis_siswa'] as $row) : ?>
+                      <option value="<?= $row['nis']; ?>"><?= $row['nis']; ?></option>
+                    <?php endforeach; ?>
+                  </select>
                 </div>
                 <div class="mb-3">
                   <label class="mb-2" for="email">Email</label>
