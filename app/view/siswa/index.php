@@ -11,8 +11,8 @@
                                 <div class="row no-gutters align-items-center px-4">
                                     <div class="col ms-2">
                                         <div class="mb-2 text-xs fw-bold text-primary text-uppercase">Total Siswa Kelas X </div>
-                                        <div class="h5">!0</div>
-                                    </div>
+                                        <div class="h5"><?= count($data['siswaKelasX']); ?></div>
+                                    </div> 
                                     <div class="col-auto">
                                         <i class="fa-solid fa-user fa-2x" style="color: #abadb8;"></i>
                                     </div>
@@ -26,7 +26,7 @@
                                 <div class="row no-gutters align-items-center px-4">
                                     <div class="col ms-2">
                                         <div class="mb-2 text-xs fw-bold text-warning text-uppercase">Total Siswa Kelas XI </div>
-                                        <div class="h5">!0</div>
+                                        <div class="h5"><?= count($data['siswaKelasXI']); ?></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fa-solid fa-user fa-2x" style="color: #abadb8;"></i>
@@ -41,7 +41,7 @@
                                 <div class="row no-gutters align-items-center px-4">
                                     <div class="col ms-2">
                                         <div class="mb-2 text-xs fw-bold text-info text-uppercase">Total Siswa Kelas XII </div>
-                                        <div class="h5">!0</div>
+                                        <div class="h5"><?= count($data['siswaKelasXII']); ?></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fa-solid fa-user fa-2x" style="color: #abadb8;"></i>
@@ -100,7 +100,7 @@
                                         <button data-bs-toggle="modal" data-bs-target="#editDataSiswa" data-id="<?= $rowSiswa['nis']; ?>" id="dataEditSiswa" class="btn btn-warning text-white rounded"><i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></button>
                                         <a href="<?= BASEURL ?>/siswa/deleteData/<?= $rowSiswa['nis']; ?>" class="btn btn-danger text-white rounded"><i class="fa-solid fa-trash-can" style="color: #ffffff;"></i></a>
                                     </td>
-                                </tr>
+                                </tr> 
                                 <?php endforeach; ?>
                             </tbody>
                         </table>

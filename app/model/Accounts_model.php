@@ -13,7 +13,7 @@ class Accounts_model {
 
     public function tambahDataUser($data)
     {
-        $username = $data['username'];
+        $username = $data['nis'];
         $email = $data['email'];
         $password = $data['password'];
         $status = 'true';
@@ -105,7 +105,7 @@ class Accounts_model {
 
     public function editDataUser($data)
     {
-        $username = $data['username'];
+        $username = $data['nis'];
         $email = $data['email'];
         $status = $data['status'];
 

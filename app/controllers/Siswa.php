@@ -7,6 +7,9 @@ class Siswa extends Controller {
         $data['judul'] = 'Kelola Siswa';
         $data['siswa'] = $this->model('Siswa_model')->getQuerySiswa();
         $data['jurusan'] = $this->model('Jurusan_model')->getQueryJurusan();
+        $data['siswaKelasX'] = $this->model('Siswa_model')->getQuerySiswaX();
+        $data['siswaKelasXI'] = $this->model('Siswa_model')->getQuerySiswaXI();
+        $data['siswaKelasXII'] = $this->model('Siswa_model')->getQuerySiswaXII();
 
         $this->view('tamplates/header', $data);
         $this->view('siswa/index', $data);

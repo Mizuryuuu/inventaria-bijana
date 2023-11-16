@@ -3,6 +3,8 @@ var buttonEditSiswa = document.querySelectorAll('#dataEditSiswa');
 var selectKelas = document.getElementById('kelasEdit');
 var selectTingkatan = document.getElementById('tingkatanEdit');
 
+var buttonEditJurusan = document.querySelectorAll('#dataEditJurusan');
+
 if ( buttonEdit != null ) {
     buttonEdit.forEach(edit => {
         edit.addEventListener('click', function() {
@@ -88,6 +90,28 @@ if( buttonEditSiswa != null ) {
                     });
 
                 });
+
+            });
+
+        });
+    });
+}
+
+if( buttonEditJurusan != null ) {
+    buttonEditJurusan.forEach(dataJurusan => {
+        dataJurusan.addEventListener('click', function() {
+            var jurusanKode = this.dataset.id;
+            // console.log(jurusanKode);
+
+            fetch('http://localhost/inventaria-bijana/public/jurusan/queryJurusanJSON/' + jurusanKode)
+            .then(responese => responese.json())
+            .then(dataQueryJurusan => {
+                // console.log(dataQueryJurusan);
+
+                document.getElementById('kodeJRSN').value = dataQueryJurusan.kode_jurusan;
+                document.getElementById('kodeJurusan').value = dataQueryJurusan.kode_jurusan;
+                document.getElementById('namaJurusan').value = dataQueryJurusan.nama_jurusan;
+                document.getElementById('jumlahKelas').value = dataQueryJurusan.jumlah_kelas;
 
             });
 

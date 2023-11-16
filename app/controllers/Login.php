@@ -53,13 +53,14 @@ class Login extends Controller{
 
                 if( password_verify($password, $passwordDb) ) {
 
-                    // account admin
+                    // account admin@gmail.com
                     // admin : 12345
                     // account User biasa
                     // bijana : qwerty
 
                     $_SESSION['userLogin'] = "success";
                     $_SESSION['status'] = $data['level'];
+                    $_SESSION['username'] = $data['username'];
 
                     if( $data['level'] != 0 ) {
                         $location = "dashboard";

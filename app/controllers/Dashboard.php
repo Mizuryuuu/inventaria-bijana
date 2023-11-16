@@ -36,8 +36,6 @@ class Dashboard extends Controller{
 
     public function tambah(){
 
-        // var_dump($_POST);
-        // die;
 
         if( $this->model('Accounts_model')->tambahDataUser($_POST) > 0 ) {  
             $location = 'dashboard';

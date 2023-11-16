@@ -3,6 +3,7 @@
 class Siswa_model {
 
     private $tabel = 'siswa';
+    private $tabelJoinJurusan = 'jurusan';
     private $db;
 
     public function __construct()
@@ -15,6 +16,38 @@ class Siswa_model {
         $query = "SELECT * FROM " . $this->tabel . " LIMIT 5 ";
         $this->db->query($query);
         return $this->db->resultSet();
+    }
+
+    public function getQuerySiswaX()
+    {
+        $query = "SELECT * FROM " . $this->tabel . " WHERE id_tingkat = 1";
+        $this->db->query($query);
+        return $this->db->resultSet();
+    }
+
+    public function getQuerySiswaXI()
+    {
+        $query = "SELECT * FROM " . $this->tabel . " WHERE id_tingkat = 2";
+        $this->db->query($query);
+        return $this->db->resultSet();
+    }
+
+    public function getQuerySiswaXII()
+    {
+        $query = "SELECT * FROM " . $this->tabel . " WHERE id_tingkat = 3";
+        $this->db->query($query);
+        return $this->db->resultSet();
+    }
+
+    public function getSiswaBiodataByNis($nis)
+    {
+        $query = "SELECT nis, nama_siswa, " . $this->tabel . ".kode_jurusan, kelas, id_tingkat, nama_jurusan FROM " . 
+                    $this->tabel . " INNER JOIN " . $this->tabelJoinJurusan . " ON " . $this->tabel . ".kode_jurusan = " . 
+                    $this->tabelJoinJurusan . ".kode_jurusan WHERE " . $this->tabel . ".nis =:nis";
+        $this->db->query($query);
+        $this->db->bind('nis', $nis);
+        $this->db->execute();
+        return $this->db->singel();
     }
 
     public function getUserByNis($SiswaNis)
@@ -50,7 +83,17 @@ class Siswa_model {
             $this->db->bind('alamat', $alamat);
     
             $this->db->execute();
-            return $this->db->rowCount();
+            $cekInsert = $this->db->rowCount();
+            if($cekInsert > 0) {
+                for ($i=1; $i <= 12; $i++) { 
+                    $query = "INSERT INTO tb_pembayaran VALUES ( null, :nis, :id_spp, null, 'Belum Lunas', null)";
+                    $this->db->query($query);
+                    $this->db->bind('nis', $nis);
+                    $this->db->bind('id_spp', $i);
+                    $this->db->execute();
+                }
+                return $this->db->rowCount();
+            } 
         }
 
     }
@@ -66,7 +109,7 @@ class Siswa_model {
         $alamat = $data['alamat'];
 
         $kode_jurusan = $dataKelas[0];
-        $kelas = $dataKelas[1];
+        $kelas = $dataKelas[1]; 
 
         $query = "UPDATE " . $this->tabel . " 
                     SET nis =:nis, 

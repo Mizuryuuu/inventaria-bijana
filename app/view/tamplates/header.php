@@ -11,6 +11,7 @@
     </head>
     <body>
 
+    <?php if( $_SESSION['status'] != 0 ) : ?>
      <!-- Body Design -->
      <div class="body-design">
             <div class="row">
@@ -56,3 +57,29 @@
                     </div>
                 </div>
                 <!-- End Sidebar Design -->
+        <?php else : ?>
+
+            <div class="container-fluid  bg-body-tertiary p-3 px-5 shadow-sm">
+                <nav class="navbar navbar-expand-lg">
+                        <a class="navbar-brand" href="#">Pembayaran Spp</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarScroll">
+                            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="<?= BASEURL; ?>/userpage">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="<?= BASEURL; ?>/userpage/pembayaran">Pembayaran</a>
+                                </li>
+                                
+                            </ul>
+                            <div class="d-flex">
+                                <a href="<?= BASEURL; ?>/login/logout" class="btn btn-success px-4">Logout</a>
+                            </div>
+                        </div>
+                    </nav>
+            </div>
+
+        <?php endif; ?>
