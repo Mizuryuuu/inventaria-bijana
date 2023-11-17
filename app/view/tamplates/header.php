@@ -41,7 +41,7 @@
                                         Kompetensi Keahlian
                                     </a>
                                     <hr class="line-fill">
-                                    <a href="<?= BASEURL; ?>/managepayment" class="dasboard">
+                                    <a href="<?= BASEURL; ?>/pembayaran" class="dasboard">
                                         <i class="fa-solid fa-dollar-sign me-2">&nbsp;</i>
                                         Kelola Pembayaran
                                     </a>
@@ -68,10 +68,10 @@
                         <div class="collapse navbar-collapse" id="navbarScroll">
                             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                                 <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="<?= BASEURL; ?>/userpage">Home</a>
+                                    <a class="nav-link <?= ( $data['page'] == 'Home' ) ? "active" : '' ?>" aria-current="page" href="<?= BASEURL; ?>/userpage">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?= BASEURL; ?>/userpage/pembayaran">Pembayaran</a>
+                                    <a class="nav-link <?= ( $data['page'] == 'Pembayaran' ) ? "active" : '' ?>" href="<?= BASEURL; ?>/userpage/pembayaran">Pembayaran</a>
                                 </li>
                                 
                             </ul>

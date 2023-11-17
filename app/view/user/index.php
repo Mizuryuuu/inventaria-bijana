@@ -67,9 +67,9 @@
                                     <td><?= $rowTagihan['bulan']; ?></td>
                                     <td><?= $rowTagihan['harga']; ?></td>
                                     <td><?= $rowTagihan['tanggal_bayar']; ?></td>
-                                    <td><?= $rowTagihan['keterangan']; ?></td>
+                                    <td><span class="badge text-bg-<?= ($rowTagihan['keterangan'] == 'Lunas') ? 'success' : ($rowTagihan['keterangan'] == 'Pending' ? 'warning' : 'danger') ?>"><?= $rowTagihan['keterangan']; ?></span></td>
                                     <td>
-                                        <button disabled data-bs-toggle="modal" data-bs-target="#viewDetailPembayaran" data-id="<?= $rowJurusan['kode_jurusan']; ?>" id="dataEditJurusan" class="btn btn-secondary text-white rounded"><i class="fa-solid fa-eye" style="color: #ffffff;"></i></button>
+                                        <button id="viewDataDetail" <?= ( $rowTagihan['keterangan'] == 'Lunas' ) ? '' : 'disabled'; ?> data-bs-toggle="modal" data-bs-target="#viewDetailPembayaran" data-id="<?= $rowTagihan['id_pembayaran']; ?>" class="btn btn-<?= ( $rowTagihan['keterangan'] == 'Lunas' ) ? 'info' : 'secondary'; ?> text-white rounded"><i class="fa-solid fa-eye" style="color: #ffffff;"></i></button>
                                     </td>
                                 </tr>
                                 <?php $i++; ?>
@@ -90,7 +90,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
+                <div id="detailImage" class="text-center">
+                        <img id="imageElement" src="" width="450px" class="" alt="">
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

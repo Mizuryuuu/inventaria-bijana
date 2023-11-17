@@ -108,7 +108,7 @@
                     <?php $i++ ?>
                     <?php endforeach ; ?>
                     </tbody> 
-                </ta  ble>
+                </table>
             </div>
             <div class="pagination d-flex justify-content-end me-5 ">
               <nav aria-label="Page navigation example">

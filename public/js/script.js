@@ -2,8 +2,70 @@ var buttonEdit = document.querySelectorAll('#dataEdit');
 var buttonEditSiswa = document.querySelectorAll('#dataEditSiswa');
 var selectKelas = document.getElementById('kelasEdit');
 var selectTingkatan = document.getElementById('tingkatanEdit');
+var queryPendingButton = document.querySelectorAll('#dataPending');
+var selectValid = document.querySelectorAll('#validasiInput');
+var buttonViewDetail = document.querySelectorAll('#viewDataDetail');
 
 var buttonEditJurusan = document.querySelectorAll('#dataEditJurusan');
+
+if( buttonViewDetail != null ) {
+
+    buttonViewDetail.forEach(viewSelectedQuery => {
+        viewSelectedQuery.addEventListener('click', function() {
+
+            var idPembayaran = this.dataset.id;
+
+            fetch('http://localhost/inventaria-bijana/public/pembayaran/getQueryPending/' + idPembayaran)
+            .then(responese => responese.json())
+            .then(dataValid => {
+
+                var imageElement = document.getElementById("imageElement");
+
+                imageElement.src = 'http://localhost/inventaria-bijana/public/img/image_upload/' + dataValid.gambar;
+
+            });
+
+        });
+    });
+
+}
+
+if( queryPendingButton != null ) {
+
+    queryPendingButton.forEach(Pending => {
+        Pending.addEventListener('click', function() {
+            var idQuery = this.dataset.id;
+
+            document.getElementById('id_pembayaran').value = idQuery;
+
+            fetch('http://localhost/inventaria-bijana/public/pembayaran/getQueryPending/' + idQuery)
+            .then(responese => responese.json())
+            .then(dataValid => {
+
+                selectValid.forEach(testOption => {
+
+                    for (let i = 0; i < testOption.length; i++) {
+
+                        var valueOption = testOption[i];
+
+                        if( valueOption.value == dataValid.keterangan ) {
+                            valueOption.selected = true;
+                        }
+                    }
+
+                });
+
+            });
+
+        });
+    });
+
+}
+
+
+function formatNumber(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
 
 if ( buttonEdit != null ) {
     buttonEdit.forEach(edit => {

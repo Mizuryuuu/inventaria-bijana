@@ -53,10 +53,10 @@ class Login extends Controller{
 
                 if( password_verify($password, $passwordDb) ) {
 
-                    // account admin@gmail.com
-                    // admin : 12345
+                    // account admin
+                    // admin@gmail.com : 12345
                     // account User biasa
-                    // bijana : qwerty
+                    // 1001/1002/1003 : qwerty
 
                     $_SESSION['userLogin'] = "success";
                     $_SESSION['status'] = $data['level'];
